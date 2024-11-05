@@ -1,0 +1,45 @@
+.card {
+  padding: 20px;
+  width: 300px;
+  height: auto;
+  border-color: antiquewhite;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+.cardList {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 24px;
+  margin-top: 70px;
+  margin-bottom: 30px;
+}
+.container {
+  display: flex;
+}
+
+.name {
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 1.3;
+  margin-top: 10px;
+}
+.image {
+  width: 100%; /* Изображение занимает всю ширину карточки */
+  height: auto; /* Автоматическая высота для сохранения пропорций */
+  border-bottom: 1px solid #eaeaea;
+  border-radius: 10px;
+}
+
+.header {
+  margin-top: 20px;
+  font-weight: 700;
+  font-size: 24px;
+}
