@@ -6,13 +6,13 @@ import { useState } from "react";
 export default function HeroList({ heroes, fetchHeroes }) {
   const [selectedHeroId, setSelectedHeroId] = useState(null);
 
-  const handleHeroClick = (heroId) => {
-    setSelectedHeroId(heroId);
+  const handleHeroClick = (id) => {
+    setSelectedHeroId(id);
   };
 
   const closeHeroDetails = () => {
     setSelectedHeroId(null);
-    fetchHeroes(); // Обновляем список героев после закрытия модального окна
+    fetchHeroes();
   };
 
   return (
@@ -22,13 +22,13 @@ export default function HeroList({ heroes, fetchHeroes }) {
         {heroes.map((hero) => (
           <li
             className={style.card}
-            key={hero.id}
-            onClick={() => handleHeroClick(hero.id)}
+            key={hero._id}
+            onClick={() => handleHeroClick(hero._id)}
           >
             <img
               className={style.image}
               src={
-                hero.images ||
+                hero.image ||
                 "https://lh6.googleusercontent.com/proxy/wSb-FphGOKoLEKGRZpKi45xy2ZmDDgrtP96i11RZz702kHmnCD40yOWvNamjENf3DGUrxNYVqAsWqnNrElZbpEFmddD4yt_Frk4eVq-B6Gbn52WoDruNdhrHVxHSaqBfeKGBEyiE_BZ_PBkgB-o4i2XQ_MrHHqgWjTe13oUNynQLW3rJHjKxZN-_wbIpz3wKB70ZP97Mj2KEjLZIEArAza0FX-I0gvWncErLTnbAYsDqPuc"
               }
               alt={hero.nickname}
@@ -38,6 +38,7 @@ export default function HeroList({ heroes, fetchHeroes }) {
           </li>
         ))}
       </ul>
+
       {selectedHeroId && (
         <HeroDetails
           heroId={selectedHeroId}

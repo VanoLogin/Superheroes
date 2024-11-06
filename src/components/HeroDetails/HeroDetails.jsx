@@ -8,12 +8,11 @@ import { getHeroById, deleteHero } from "../../services/heroService";
 export default function HeroDetails({ heroId, onClose, fetchHeroes }) {
   const [hero, setHero] = useState(null);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-
   useEffect(() => {
     const fetchHeroDetails = async () => {
       try {
         const response = await getHeroById(heroId);
-        setHero(response);
+        setHero(response.data);
       } catch (error) {
         console.error("Error fetching hero details:", error);
       }
@@ -38,6 +37,7 @@ export default function HeroDetails({ heroId, onClose, fetchHeroes }) {
   if (!hero) {
     return <p>Loading...</p>;
   }
+  console.log(hero);
 
   const deleteHeroById = async (heroId) => {
     try {
@@ -52,7 +52,7 @@ export default function HeroDetails({ heroId, onClose, fetchHeroes }) {
   return (
     <Modal modalTitle={hero.nickname} onClose={onClose}>
       <div className={styles.details}>
-        <img src={hero.images} alt={hero.nickname} className={styles.image} />
+        <img src={hero.image} alt={hero.nickname} className={styles.image} />
         <div className={styles.wrapper}>
           <p>
             <span>Nickname:</span> {hero.nickname}

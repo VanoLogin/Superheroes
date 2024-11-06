@@ -11,7 +11,7 @@ const HeroForm = ({ onSuccess }) => {
     originDescription: "",
     superpowers: "",
     catchPhrase: "",
-    images: "",
+    image: "",
   };
 
   const handleSubmit = async (values, { setSubmitting, resetForm }) => {
@@ -19,8 +19,8 @@ const HeroForm = ({ onSuccess }) => {
     try {
       const heroData = {
         ...values,
-        images:
-          values.images ||
+        image:
+          values.image ||
           "https://lh6.googleusercontent.com/proxy/wSb-FphGOKoLEKGRZpKi45xy2ZmDDgrtP96i11RZz702kHmnCD40yOWvNamjENf3DGUrxNYVqAsWqnNrElZbpEFmddD4yt_Frk4eVq-B6Gbn52WoDruNdhrHVxHSaqBfeKGBEyiE_BZ_PBkgB-o4i2XQ_MrHHqgWjTe13oUNynQLW3rJHjKxZN-_wbIpz3wKB70ZP97Mj2KEjLZIEArAza0FX-I0gvWncErLTnbAYsDqPuc", // Заглушка для фото
       };
       await createHero(heroData);
@@ -96,9 +96,9 @@ const HeroForm = ({ onSuccess }) => {
           </label>
 
           <label className={style.label}>
-            Images (URL):
+            Image (URL):
             <Field
-              name="images"
+              name="image"
               placeholder="paste a URL for image"
               className={style.input}
             />

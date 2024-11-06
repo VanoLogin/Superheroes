@@ -1,10 +1,12 @@
 import axios from "axios";
 
-const API_URL = "https://666dd0797a3738f7cacd6250.mockapi.io/superHeroes";
+const API_URL = "https://backend-superheroes.onrender.com/superheroes";
 
-export const getHeroes = async (page = 1) => {
+export const getHeroes = async (page, perPage) => {
   try {
-    const response = await axios.get(`${API_URL}?page=${page}`);
+    const response = await axios.get(
+      `${API_URL}?page=${page}&perPage=${perPage}`
+    );
     return response.data;
   } catch (error) {
     console.error("Error loading heroes:", error);
@@ -33,11 +35,12 @@ export const getHeroById = async (id) => {
 
 export const createHero = async (heroData) => {
   try {
+    console.log(heroData);
     const response = await axios.post(API_URL, heroData);
     return response.data;
   } catch (error) {
     console.error("Error creating hero:", error);
-    throw error;
+    throw error.massage;
   }
 };
 
