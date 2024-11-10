@@ -3,7 +3,7 @@ import style from "./style.module.scss";
 import HeroDetails from "../HeroDetails/HeroDetails";
 import { useState } from "react";
 
-export default function HeroList({ heroes, fetchHeroes }) {
+export default function HeroList({ heroes, heroesController }) {
   const [selectedHeroId, setSelectedHeroId] = useState(null);
 
   const handleHeroClick = (id) => {
@@ -12,7 +12,6 @@ export default function HeroList({ heroes, fetchHeroes }) {
 
   const closeHeroDetails = () => {
     setSelectedHeroId(null);
-    fetchHeroes();
   };
 
   return (
@@ -43,7 +42,7 @@ export default function HeroList({ heroes, fetchHeroes }) {
         <HeroDetails
           heroId={selectedHeroId}
           onClose={closeHeroDetails}
-          fetchHeroes={fetchHeroes}
+          heroesController={heroesController}
         />
       )}
     </div>
@@ -52,5 +51,5 @@ export default function HeroList({ heroes, fetchHeroes }) {
 
 HeroList.propTypes = {
   heroes: PropTypes.array.isRequired,
-  fetchHeroes: PropTypes.func.isRequired,
+  heroesController: PropTypes.object.isRequired,
 };

@@ -42,7 +42,7 @@ export default function Modal({ modalTitle, children, onClose }) {
         <div className={styles.modalContent}>{children}</div>
       </div>
     </div>,
-    document.body
+    document.querySelector("#modal")
   );
 }
 

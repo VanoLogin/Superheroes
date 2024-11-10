@@ -14,11 +14,11 @@ export default function EditHero({ hero, onClose, onHeroUpdated }) {
           originDescription: hero.originDescription || "",
           superpowers: hero.superpowers || "",
           catchPhrase: hero.catchPhrase || "",
-          images: hero.images || "",
+          image: hero.image || "",
         }}
         onSubmit={async (values) => {
           try {
-            const updatedHero = await updateHero(hero.id, values);
+            const updatedHero = await updateHero(hero._id, values);
             onHeroUpdated(updatedHero);
             onClose();
           } catch (error) {
@@ -50,7 +50,7 @@ export default function EditHero({ hero, onClose, onHeroUpdated }) {
             </label>
             <label>
               Image URL:
-              <Field type="text" name="images" />
+              <Field type="text" name="image" />
             </label>
             <button
               type="submit"

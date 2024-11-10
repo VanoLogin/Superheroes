@@ -11,6 +11,40 @@ export default function App() {
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(5);
 
+  const findHeroIndexById = (heroId) =>
+    heroes.findIndex(({ _id }) => heroId === _id);
+
+  const updateHeroById = (heroId, updatedHero) => {
+    const index = findHeroIndexById(heroId);
+
+    if (index !== -1) {
+      setHeroes((prev) => {
+        prev.splice(index, 1, updatedHero);
+        return prev;
+      });
+    }
+  };
+
+  const deleteHeroById = (heroId) => {
+    const index = findHeroIndexById(heroId);
+    if (index !== -1) {
+      setHeroes((prev) => {
+        prev.splice(index, 1);
+        return prev;
+      });
+    }
+  };
+
+  const addNewHero = (newHero) => {
+    setHeroes([newHero, ...heroes]);
+  };
+
+  const heroesController = {
+    updateHeroById,
+    deleteHeroById,
+    addNewHero,
+  };
+
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
 
@@ -28,8 +62,8 @@ export default function App() {
     fetchHeroes();
   }, [page]); // Перезапрашиваем данные, когда меняется текущая страница
 
-  const handleHeroAdded = () => {
-    fetchHeroes();
+  const handleHeroAdded = (newHero) => {
+    heroesController.addNewHero(newHero);
     closeModal();
   };
 
@@ -52,7 +86,11 @@ export default function App() {
             <HeroForm onSuccess={handleHeroAdded} />
           </Modal>
         )}
-        <HeroList heroes={heroes} fetchHeroes={fetchHeroes} />
+        <HeroList
+          heroes={heroes}
+          fetchHeroes={fetchHeroes}
+          heroesController={heroesController}
+        />
         <Pagination
           currentPage={page}
           totalPages={totalPages}

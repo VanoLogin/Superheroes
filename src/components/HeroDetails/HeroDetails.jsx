@@ -5,9 +5,10 @@ import EditHero from "../EditForm/EditHero.jsx";
 import styles from "./style.module.scss";
 import { getHeroById, deleteHero } from "../../services/heroService";
 
-export default function HeroDetails({ heroId, onClose, fetchHeroes }) {
+export default function HeroDetails({ heroId, onClose, heroesController }) {
   const [hero, setHero] = useState(null);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+
   useEffect(() => {
     const fetchHeroDetails = async () => {
       try {
@@ -21,7 +22,7 @@ export default function HeroDetails({ heroId, onClose, fetchHeroes }) {
     fetchHeroDetails();
   }, [heroId]);
 
-  const handleEditClick = () => {
+  const handleEditOpen = () => {
     setIsEditModalOpen(true);
   };
 
@@ -31,18 +32,19 @@ export default function HeroDetails({ heroId, onClose, fetchHeroes }) {
 
   const handleHeroUpdated = (updatedHero) => {
     setHero(updatedHero);
-    fetchHeroes();
+    heroesController.updateHeroById(heroId, updatedHero);
   };
 
   if (!hero) {
     return <p>Loading...</p>;
   }
-  console.log(hero);
 
   const deleteHeroById = async (heroId) => {
     try {
       await deleteHero(heroId);
-      fetchHeroes();
+      heroesController.deleteHeroById(heroId);
+
+      // fetchHeroes();
       onClose();
     } catch (error) {
       console.error("Error deleting hero:", error);
@@ -70,7 +72,7 @@ export default function HeroDetails({ heroId, onClose, fetchHeroes }) {
             <span>Catch phrase:</span> {hero.catchPhrase}
           </p>
         </div>
-        <button className={styles.editBtn} onClick={handleEditClick}>
+        <button className={styles.editBtn} onClick={handleEditOpen}>
           Edit
         </button>
         <button
@@ -94,5 +96,5 @@ export default function HeroDetails({ heroId, onClose, fetchHeroes }) {
 HeroDetails.propTypes = {
   heroId: PropTypes.string.isRequired,
   onClose: PropTypes.func.isRequired,
-  fetchHeroes: PropTypes.func.isRequired,
+  heroesController: PropTypes.object.isRequired,
 };

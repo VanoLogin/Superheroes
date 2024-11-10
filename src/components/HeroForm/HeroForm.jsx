@@ -23,8 +23,8 @@ const HeroForm = ({ onSuccess }) => {
           values.image ||
           "https://lh6.googleusercontent.com/proxy/wSb-FphGOKoLEKGRZpKi45xy2ZmDDgrtP96i11RZz702kHmnCD40yOWvNamjENf3DGUrxNYVqAsWqnNrElZbpEFmddD4yt_Frk4eVq-B6Gbn52WoDruNdhrHVxHSaqBfeKGBEyiE_BZ_PBkgB-o4i2XQ_MrHHqgWjTe13oUNynQLW3rJHjKxZN-_wbIpz3wKB70ZP97Mj2KEjLZIEArAza0FX-I0gvWncErLTnbAYsDqPuc", // Заглушка для фото
       };
-      await createHero(heroData);
-      onSuccess();
+      const newHero = await createHero(heroData);
+      onSuccess(newHero);
       resetForm();
     } catch (error) {
       console.error("Error creating hero:", error);
@@ -103,7 +103,7 @@ const HeroForm = ({ onSuccess }) => {
               className={style.input}
             />
             <ErrorMessage
-              name="images"
+              name="image"
               component="div"
               className={style.errorMessage}
             />
