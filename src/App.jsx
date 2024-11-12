@@ -51,8 +51,8 @@ export default function App() {
   const fetchHeroes = async () => {
     try {
       const response = await getHeroes(page);
-      setHeroes(response.data.data);
-      setTotalPages(response.data.totalPages); // Устанавливаем общее количество страниц из ответа
+      setHeroes(response.data);
+      setTotalPages(response.totalPages); // Устанавливаем общее количество страниц из ответа
     } catch (error) {
       console.error(error);
     }

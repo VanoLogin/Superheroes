@@ -7,7 +7,7 @@ export const getHeroes = async (page, perPage) => {
   const response = await axios.get("/", {
     params,
   });
-  return response.data;
+  return response.data.data;
 };
 
 export const getAllHeroes = async () => {
